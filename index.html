@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jalsure - Water Purity Monitoring</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="logo">Jalsure</div>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#sensors">Sensors</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="mobileMenuBtn" class="mobile-menu-btn">☰</button>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Ensuring Clean Water for a Better Future</h1>
+      <p>Detecting and Monitoring Water Purity Across India</p>
+      <a href="#sensors" class="cta-button">Explore Sensors</a>
+    </div>
+  </section>
+
+  <main>
+    <!-- Sensors Section -->
+    <section id="sensors" class="sensors-section">
+      <h2>Sensor Locations</h2>
+      <div class="sensor-locations">
+        <ul>
+          
+          <li>----</li>
+          <li>----</li>
+          <li><a href="">Durg(shivnath river)</a></li>
+          <li>----</li>
+          <li>----</li>
+          </ul>
+      </div>
+      <div class="map-container">
+        <img src="India_Map-Photoroom.png" alt="India Map" class="map">
+        <!-- Sensor marker -->
+        <div class="sensor-marker" style="top: 54%; left: 46.5%;" title="shivnath river"></div>
+      </div>
+      
+      <!-- Overlay for background blur -->
+      <div class="overlay" id="overlay"></div>
+      
+      <!-- Meter Panel -->
+      <div class="meter-panel" id="meterPanel">
+       
+        <div class="meters-wrapper">
+          <!-- Turbidity Meter -->
+          <div class="speedometer-container" id="turbidityMeter">
+            <div class="metal-ring">
+              <div class="glass-face">
+                <svg class="speedometer-svg" viewBox="0 0 200 200">
+                  <path id="arcGreen" d="M140,31 A80,80 0 0,1 140,169" />
+                  <path id="arcRed" d="M140,169 A80,80 0 0,1 20,100" />
+                  <!-- Background Dial -->
+                  <circle cx="100" cy="100" r="80" fill="#f8f8f8" />
+                  <!-- Minimal Tick (for example purposes) -->
+                  <line x1="100" y1="20" x2="100" y2="30" stroke="#333" stroke-width="2" transform="rotate(-60,100,100)" />
+                  <text x="100" y="18" text-anchor="middle" font-size="10" fill="#333" transform="rotate(-60,100,100)">0</text>
+                  <!-- Turbidity Needle -->
+                  <line id="needleTurbidity" x1="100" y1="100" x2="100" y2="40" stroke="#ff5722" stroke-width="3" stroke-linecap="round" transform="rotate(-60,100,100)" />
+                  <!-- Center Cap -->
+                  <circle cx="100" cy="100" r="5" fill="#555" />
+                  <!-- Label -->
+                  <text x="100" y="115" text-anchor="middle" font-size="10" fill="#777" font-weight="bold">TURBIDITY</text>
+                  <!-- Numeric Reading -->
+                  <text id="readingValueTurbidity" class="reading-value" x="100" y="150" text-anchor="middle" font-size="14">0 NTU</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+        
+          <!-- Temperature Meter -->
+          <div class="speedometer-container" id="temperatureMeter">
+            <div class="metal-ring">
+              <div class="glass-face">
+                <<svg class="speedometer-svg" viewBox="0 0 200 200">
+                  <!-- Background circle (optional) -->
+                  <circle cx="100" cy="100" r="80" fill="#f8f8f8" />
+                
+                  <!-- Arc for 0–5°C (Yellow) -->
+                  <path
+                    d="M 140,30.72 A 80,80 0 0,1 153.53,40.55"
+                    stroke="#FFD600"
+                    stroke-width="10"
+                    fill="none"
+                    stroke-linecap="round"
+                  />
+                
+                  <!-- Arc for 5–25°C (Green) -->
+                  <path
+                    d="M 153.53,40.55 A 80,80 0 0,1 180,100"
+                    stroke="#4CAF50"
+                    stroke-width="10"
+                    fill="none"
+                    stroke-linecap="round"
+                  />
+                
+                  <!-- Arc for 25–60°C (Yellow) -->
+                  <path
+                    d="M 180,100 A 80,80 0 0,1 108.36,179.56"
+                    stroke="#FFD600"
+                    stroke-width="10"
+                    fill="none"
+                    stroke-linecap="round"
+                  />
+                
+                  <!-- Arc for 60–100°C (Red) -->
+                  <path
+                    d="M 108.36,179.56 A 80,80 0 0,1 20,100"
+                    stroke="#f44336"
+                    stroke-width="10"
+                    fill="none"
+                    stroke-linecap="round"
+                  />
+                
+                  <!-- Needle (initially at -60°, i.e. 0°C) -->
+                  <line
+                    id="needleTemperature"
+                    x1="100" y1="100" x2="100" y2="40"
+                    stroke="#ff5722"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    transform="rotate(-60,100,100)"
+                  />
+                
+                  <!-- Center cap -->
+                  <circle cx="100" cy="100" r="5" fill="#555" />
+                
+                  <!-- Numeric Reading -->
+                  <text
+                    id="readingValueTemperature"
+                    class="reading-value"
+                    x="100" y="150"
+                    text-anchor="middle"
+                    font-size="14"
+                  >
+                    0 °C
+                  </text>
+                </svg>
+                
+                
+              </div>
+            </div>
+          </div>
+          <!-- Example arcs covering -60° to +60° (green) and +60° to +180° (red) -->
+
+        </div>
+        
+       
+
+
+       
+        </div>
+        
+        
+      
+      
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="stat-box" id="sensorsStat">
+        <h3>Sensors Deployed</h3>
+        <p id="sensorsCount">0</p>
+      </div>
+      <div class="stat-box" id="dirtyWaterStat">
+        <h3>Dirty Water Detections</h3>
+        <p id="dirtyCount">0</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

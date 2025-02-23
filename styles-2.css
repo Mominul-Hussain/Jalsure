@@ -1,0 +1,370 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #f1f1f1;
+  }
+  
+  /* Top Navigation */
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e1e1e;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .top-nav .logo {
+    font-size: 1.8rem;
+    color: #6378ff;
+    font-weight: bold;
+  }
+  .nav-menu ul {
+    list-style: none;
+    display: flex;
+  }
+  .nav-menu ul li {
+    margin-left: 20px;
+  }
+  .nav-menu ul li a {
+    text-decoration: none;
+    color: #f1f1f1;
+    transition: color 0.3s;
+  }
+  .nav-menu ul li a:hover {
+    color: #6476ed;
+  }
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #f1f1f1;
+  }
+  
+  /* Hero Section */
+  .hero {
+    height: 60vh;
+    background: url('hero-background.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 20px;
+  }
+  .hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #5a6de9;
+  }
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #ddd;
+  }
+  .cta-button {
+    padding: 10px 20px;
+    background-color: #7484eb;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  .cta-button:hover {
+    background-color: #6477f0;
+  }
+  
+  /* Sensors Section */
+  .sensors-section {
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .sensors-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #5267ef;
+  }
+  .sensor-locations ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .sensor-locations ul li {
+    margin: 10px 15px;
+    padding: 8px 15px;
+    background-color: #1e1e1e;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .sensor-locations ul li:hover {
+    background-color: #8290e7;
+  }
+  .map-container {
+    position: relative;
+    max-width: 90%;
+    margin: 0 auto;
+    animation: fadeIn 2s ease-in-out forwards;
+  }
+  .map-container .map {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+  }
+  .map-container .map:hover {
+    transform: scale(1.05);
+  }
+  .sensor-marker {
+    width: 15px;
+    height: 15px;
+    background-color: #7285fd;
+    border: 2px solid #f8f8f8;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .sensor-marker:hover {
+    transition: transform 0.5 ease;
+  }
+  
+  /* Stats Section */
+  .stats-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 20px;
+    background-color: #1e1e1e;
+  }
+  .stat-box {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  .stat-box:hover {
+    transform: translateY(-5px);
+    background-color: #2a2a2a;
+  }
+  .stat-box h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  .stat-box p {
+    font-size: 2rem;
+  }
+  
+  /* Keyframe Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .nav-menu { display: none; }
+    .mobile-menu-btn { display: block; }
+    .stats-section { flex-direction: column; align-items: center; }
+  }
+/* Map container and image */
+.map-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* Adjust as needed */
+  margin: 20px auto;
+}
+.map {
+  width: 100%;
+  display: block;
+}
+
+/* Sensor marker styling */
+.sensor-marker {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #227aff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.7s ease;
+}
+
+/* When clicked, animate marker to top-left */
+.sensor-marker.clicked {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  transform: scale(1.5);
+  z-index: 1000;
+}
+
+
+/* Map container and image */
+.map-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  .map {
+    width: 100%;
+    display: block;
+  }
+  
+  /* Sensor Marker */
+  .sensor-marker {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #ff5722;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.7s ease;
+  }
+  .sensor-marker.clicked {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    transform: scale(1.5);
+    z-index: 1000;
+  }
+  
+ /* Meter Panel - initially hidden off-screen to the right, positioned centered vertically */
+.meter-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 550px;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    /* Push it off-screen to the right initially */
+    transform: translate(200%, -50%);
+    transition: transform 0.8s ease;
+    z-index: 900;
+  }
+  .meter-panel.open {
+    /* When open, center the panel */
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Optional: Styling for the numeric lines */
+  .meter-panel p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #f1f1f1;
+  }
+  /*for blur*/
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5); /* semi-transparent dark overlay */
+    backdrop-filter: blur(5px);  /* applies a blur effect */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 800;
+  }
+  .overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* analog meter */
+
+/* Outer container for the speedometer *//* Layout for the two meters side by side */
+.meters-wrapper {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+/* Container for each speedometer */
+.speedometer-container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+/* Metallic ring (outer circle) */
+.metal-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #bbb 0%, #999 60%, #666 100%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Glass face (inner circle) */
+.glass-face {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* The SVG dial */
+.speedometer-svg {
+  width: 150px;
+  height: 150px;
+}
+
+/* Safe (green) arc and dangerous (red) arc */
+#arcGreen {
+  stroke: green;      /* Left side: safe */
+  stroke-width: 10;
+  fill: none;
+  stroke-linecap: round;
+}
+#arcRed {
+  stroke: red;        /* Right side: dangerous */
+  stroke-width: 10;
+  fill: none;
+  stroke-linecap: round;
+}
+
+/* Needle or numeric text styles */
+.reading-value {
+  fill: #333;
+  font-weight: bold;
+}
