@@ -8,6 +8,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const targetDirty = 7;    // Total dirty water detections
     const duration = 2000;    // Animation duration in ms
     
+    function fetchThingSpeakData() {
+      fetch('https://api.thingspeak.com/channels/YOUR_CHANNEL_ID/feeds.json?api_key=CQ0SIFEO2F7G16VT&results=1')
+          .then(response => response.json())
+          .then(data => {
+              let latestEntry = data.feeds[0];
+              document.getElementById("temperature").innerText = latestEntry.field1;
+              document.getElementById("humidity").innerText = latestEntry.field2;
+          })
+          .catch(error => console.log("Error fetching data: ", error));
+    }
+
+    setInterval(fetchThingSpeakData, 5000); // Update every 5 seconds
+    fetchThingSpeakData(); // Initial call
+
     function countUp(element, start, target, duration) {
       const stepTime = 50; // update every 50ms
       const step = (target - start) / (duration / stepTime);
