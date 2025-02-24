@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // ----------------------------
-  // 1. Count-up Animation
-  // ----------------------------
+  // ---------------------------------------
+  // 1. Count-up Animation for Sensor Stats
+  // ---------------------------------------
   const sensorsElement = document.getElementById('sensorsCount');
   const dirtyElement = document.getElementById('dirtyCount');
-  
   const targetSensors = 50; // Total sensors deployed
   const targetDirty = 7;    // Total dirty water detections
   const duration = 2000;    // Animation duration in ms
@@ -26,20 +25,20 @@ document.addEventListener('DOMContentLoaded', function () {
   if (sensorsElement) countUp(sensorsElement, 0, targetSensors, duration);
   if (dirtyElement) countUp(dirtyElement, 0, targetDirty, duration);
   
-  // ----------------------------
+  // ---------------------------------------
   // 2. Mobile Menu Toggle
-  // ----------------------------
+  // ---------------------------------------
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const navMenu = document.querySelector('.nav-menu');
   if (mobileMenuBtn && navMenu) {
     mobileMenuBtn.addEventListener('click', () => {
-      navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+      navMenu.style.display = (navMenu.style.display === 'flex') ? 'none' : 'flex';
     });
   }
   
-  // ----------------------------
+  // ---------------------------------------
   // 3. Meter Panel & Overlay Toggle
-  // ----------------------------
+  // ---------------------------------------
   const marker = document.querySelector('.sensor-marker');
   const meterPanel = document.getElementById('meterPanel');
   const overlay = document.getElementById('overlay');
@@ -50,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
       overlay.classList.add('active');
     });
   
-    // Clicking outside marker/meterPanel closes the panel and overlay
+    // Clicking outside marker or meterPanel closes them
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.sensor-marker') && !e.target.closest('.meter-panel')) {
         marker.classList.remove('clicked');
@@ -60,16 +59,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
   
-  // ----------------------------
+  // ---------------------------------------
   // 4. Gauge Update Functions
-  // ----------------------------
+  // ---------------------------------------
   /**
-   * Updates a gauge's needle and numeric display.
+   * Generic function to update a gauge's needle and numeric display.
    * Maps a value (0..maxValue) to an angle from -60° to +180° (a 240° sweep).
    *
-   * @param {string} needleId  - ID of the needle <line> in your SVG.
+   * @param {string} needleId  - ID of the needle <line> in the SVG.
    * @param {string} readingId - ID of the <text> element for the numeric reading.
-   * @param {number} value     - Current reading (e.g., turbidity).
+   * @param {number} value     - Current reading.
    * @param {number} maxValue  - Maximum value for the gauge.
    * @param {string} unit      - Unit string to append (e.g., " NTU").
    */
@@ -83,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   
   /**
-   * Updates the temperature gauge.
+   * Updates the temperature gauge specifically.
    * Temperature is calibrated for 0°C to 100°C.
    * Zones:
    *   - Below 5°C: Yellow
@@ -126,12 +125,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
   
-  // ----------------------------
-  // 5. Example Usage
-  // ----------------------------
-  // Update the turbidity gauge (for example, 75 NTU out of 160 NTU maximum)
+  // ---------------------------------------
+  // 5. Example Usage: Update Gauges with Sample Data
+  // ---------------------------------------
+  // For turbidity gauge (e.g., 75 NTU out of a maximum of 160 NTU)
   setGaugeValue('needleTurbidity', 'readingValueTurbidity', 75, 160, ' NTU');
   
-  // Update the temperature gauge (for example, 23 °C)
+  // For temperature gauge (e.g., 23 °C)
   setTemperatureGauge(23);
+  
+  // In the future, integrate with real sensor data by calling these functions:
+  // sensor.onUpdate((temp, turbidity) => {
+  //    setTemperatureGauge(temp);
+  //    setGaugeValue('needleTurbidity', 'readingValueTurbidity', turbidity, 160, ' NTU');
+  // });
 });
