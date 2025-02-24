@@ -8,22 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const targetDirty = 7;    // Total dirty water detections
     const duration = 2000;    // Animation duration in ms
     
-    function fetchThingSpeakData() {
-      fetch('https://api.thingspeak.com/channels/2851263/feeds.json?api_key=CQ0SIFEO2F7G16VT&results=1')
-          .then(response => response.json())
-          .then(data => {
-              let latestEntry = data.feeds[0];
-              let temperature = latestEntry.field1;  // Temperature data
-              let turbidity = latestEntry.field2;
-              document.getElementById("temperatureMeter").value = temperature;
-              document.getElementById("turbidityMeter").value = turbidity;
-          })
-          .catch(error => console.log("Error fetching data: ", error));
-    }
-
-    setInterval(fetchThingSpeakData, 5000); // Update every 5 seconds
-    fetchThingSpeakData(); // Initial call
-
     function countUp(element, start, target, duration) {
       const stepTime = 50; // update every 50ms
       const step = (target - start) / (duration / stepTime);
@@ -80,13 +64,13 @@ document.addEventListener('DOMContentLoaded', function () {
    * @param {number} maxValue  - Maximum value for the gauge.
    * @param {string} unit      - Unit string to append (e.g., " NTU").
    */
-  function setGaugeValue(needleId, readingId,turbidityMeter, maxValue, unit) {
-    turbidityMeter = Math.max(0, Math.min(turbidityMeter, maxValue));
-    const angle = -60 + (turbidityMeter/ maxValue) * 240;
+  function setGaugeValue(needleId, readingId, value, maxValue, unit) {
+    value = Math.max(0, Math.min(value, maxValue));
+    const angle = -60 + (value / maxValue) * 240;
     const needle = document.getElementById(needleId);
     needle.setAttribute('transform', `rotate(${angle},100,100)`);
     const readingText = document.getElementById(readingId);
-    readingText.textContent = `${turbidityMeter}${unit}`;
+    readingText.textContent = `${value}${unit}`;
   }
 
   /**
@@ -111,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const needle = document.getElementById('needleTemperature');
     needle.setAttribute('transform', `rotate(${angle},100,100)`);
     
-    const readingText = document.getElementById('temperatureMeter');
+    const readingText = document.getElementById('readingValueTemperature');
     readingText.textContent = `${valueC} °C`;
     
     // Update colors based on temperature zones
