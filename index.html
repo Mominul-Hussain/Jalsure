@@ -38,7 +38,9 @@
         <ul>
           
           <li>----</li>
+          <li>----</li>
           <li><a href="">Durg(shivnath river)</a></li>
+          <li>----</li>
           <li>----</li>
           </ul>
       </div>
@@ -84,7 +86,7 @@
           <div class="speedometer-container" id="temperatureMeter">
             <div class="metal-ring">
               <div class="glass-face">
-                <<svg class="speedometer-svg" viewBox="0 0 200 200">
+                <svg class="speedometer-svg" viewBox="0 0 200 200">
                   <!-- Background circle (optional) -->
                   <circle cx="100" cy="100" r="80" fill="#f8f8f8" />
                 
@@ -152,21 +154,27 @@
                 
               </div>
             </div>
+            
           </div>
           <!-- Example arcs covering -60° to +60° (green) and +60° to +180° (red) -->
 
         </div>
-        
-       
-
-
-       
-        </div>
-        
-        
-      
-      
    
+        </div>
+    
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="stat-box" id="sensorsStat">
+        <h3>Sensors Deployed</h3>
+        <p id="sensorsCount">0</p>
+      </div>
+      <div class="stat-box" id="dirtyWaterStat">
+        <h3>Dirty Water Detections</h3>
+        <p id="dirtyCount">0</p>
+      </div>
+    </section>
   </main>
 
   <script src="script.js"></script>
