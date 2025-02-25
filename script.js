@@ -139,4 +139,37 @@ document.addEventListener('DOMContentLoaded', function () {
   //    setTemperatureGauge(temp);
   //    setGaugeValue('needleTurbidity', 'readingValueTurbidity', turbidity, 160, ' NTU');
   // });
+
+  // Start updates when the page loads
+  startThingSpeakUpdates();
 });
+
+// Add this after your existing code in script.js
+async function fetchThingSpeakData() {
+  const channelID = '2851263'; // Replace with your ThingSpeak channel ID
+  const apiKey = 'CQ0SIFEO2F7G16VT'; // Replace with your ThingSpeak read API key
+  
+  try {
+    const response = await fetch(`https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${apiKey}`);
+    const data = await response.json();
+    
+    // Assuming field1 is temperature and field2 is turbidity
+    const temperature = parseFloat(data.field1);
+    const turbidity = parseFloat(data.field2);
+    
+    // Update the gauges with the new values
+    setTemperatureGauge(temperature);
+    setGaugeValue('needleTurbidity', 'readingValueTurbidity', turbidity, 160, ' NTU');
+  } catch (error) {
+    console.error('Error fetching ThingSpeak data:', error);
+  }
+}
+
+// Update readings every 15 seconds
+function startThingSpeakUpdates() {
+  // Initial update
+  fetchThingSpeakData();
+  
+  // Regular updates every 15 seconds
+  setInterval(fetchThingSpeakData, 15000);
+}
